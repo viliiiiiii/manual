@@ -1,0 +1,6 @@
+#EXTM3U
+# This is a sample playlist. Replace with your own by running ./generate_playlist.sh
+# Lines beginning with '#' are comments.
+# You can include metadata lines like:
+#EXTINF:-1,Sample Track
+/music/sample.mp3

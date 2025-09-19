@@ -1,0 +1,9 @@
+services:
+  music:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./site:/usr/share/nginx/html
+      - ./music:/usr/share/nginx/html/music
+    restart: unless-stopped
