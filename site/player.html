@@ -3,16 +3,23 @@
 <head>
   <meta charset="utf-8">
   <title>My Playlist</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; }
+    audio { width: 100%; margin: 1rem 0; }
+    li { cursor: pointer; margin: 0.25rem 0; }
+    li.playing { font-weight: bold; color: darkblue; }
+  </style>
 </head>
 <body>
-  <h1>My Playlist</h1>
+  <h1>🎵 My Playlist</h1>
   <audio id="player" controls autoplay></audio>
   <ul id="playlist"></ul>
 
   <script>
-    // List of songs manually defined:
+    // 🔊 Add as many songs as you like here:
     const songs = [
       "music/Ceca - Maskarada.mp3",
+      "music/MIRZA SELIMOVIĆ - ONO NAJBOLJE.mp3"
     ];
 
     const player = document.getElementById("player");
@@ -23,6 +30,11 @@
       current = index;
       player.src = songs[index];
       player.play();
+
+      // highlight the current song
+      Array.from(playlist.children).forEach((li, i) => {
+        li.classList.toggle("playing", i === index);
+      });
     }
 
     // Build clickable list
@@ -33,13 +45,13 @@
       playlist.appendChild(li);
     });
 
-    // Auto play next
+    // Auto play next when a song ends
     player.addEventListener("ended", () => {
-      current = (current + 1) % songs.length;
+      current = (current + 1) % songs.length; // loops back to start
       playSong(current);
     });
 
-    // Start first song
+    // Start first song automatically
     playSong(0);
   </script>
 </body>
