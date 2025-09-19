@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>My Playlist</title>
+</head>
+<body>
+  <h1>My Playlist</h1>
+  <audio id="player" controls autoplay></audio>
+  <ul id="playlist"></ul>
+
+  <script>
+    // List of songs manually defined:
+    const songs = [
+      "music/Ceca - Maskarada.mp3",
+    ];
+
+    const player = document.getElementById("player");
+    const playlist = document.getElementById("playlist");
+    let current = 0;
+
+    function playSong(index) {
+      current = index;
+      player.src = songs[index];
+      player.play();
+    }
+
+    // Build clickable list
+    songs.forEach((src, i) => {
+      const li = document.createElement("li");
+      li.textContent = src.split("/").pop();
+      li.onclick = () => playSong(i);
+      playlist.appendChild(li);
+    });
+
+    // Auto play next
+    player.addEventListener("ended", () => {
+      current = (current + 1) % songs.length;
+      playSong(current);
+    });
+
+    // Start first song
+    playSong(0);
+  </script>
+</body>
+</html>
